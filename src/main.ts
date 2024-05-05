@@ -1,8 +1,26 @@
-import './style.css'
+import { detectKeyString } from "./keyboard";
+import { focusDown, focusLeft, focusRight, focusUp, isEditing } from "./youtube";
 
-const app = document.querySelector<HTMLDivElement>('#app')!
+document.addEventListener("keydown", (event) => {
+  if (isEditing()) {
+    return;
+  }
 
-app.innerHTML = `
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-`
+  switch (detectKeyString(event)) {
+    case "arrowleft":
+      focusLeft();
+      break;
+    case "arrowdown":
+      focusDown();
+      break;
+    case "arrowup":
+      focusUp();
+      break;
+    case "arrowright":
+      focusRight();
+      break;
+    default:
+      return;
+  }
+  event.preventDefault();
+});

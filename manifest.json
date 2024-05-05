@@ -1,0 +1,12 @@
+{
+  "name": "YouTube Shortcut Plus",
+  "description": "Add more keyboard shortcuts to select videos on YouTube.",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["src/main.ts"]
+    }
+  ]
+}
