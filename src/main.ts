@@ -1,8 +1,8 @@
 import { detectKeyString } from "./keyboard";
-import { focusDown, focusLeft, focusRight, focusUp, isEditing, isForcusable } from "./youtube";
+import { focusDown, focusLeft, focusRight, focusUp, isForcusable } from "./youtube";
 
 document.addEventListener("keydown", (event) => {
-  if (isEditing() || !isForcusable()) {
+  if (!isForcusable()) {
     return;
   }
 

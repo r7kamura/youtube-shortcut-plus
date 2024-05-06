@@ -1,11 +1,3 @@
-export function isEditing() {
-  return (
-    document.activeElement?.getAttribute("contenteditable") == "true" ||
-    document.activeElement?.tagName == "INPUT" ||
-    document.activeElement?.tagName == "TEXTAREA"
-  );
-}
-
 export function focusLeft() {
   focus(findLeft());
 }
@@ -23,12 +15,21 @@ export function focusDown() {
 }
 
 export function isForcusable() {
-  return document.querySelectorAll(titleSelector).length > 1;
+  return !isEditing() &&
+    document.querySelectorAll(titleSelector).length > 1;
 }
 
 const rowSelector = "ytd-rich-grid-row";
 const columnSelector = "ytd-rich-item-renderer";
 const titleSelector = "a#video-title-link";
+
+function isEditing() {
+  return (
+    document.activeElement?.getAttribute("contenteditable") == "true" ||
+    document.activeElement?.tagName == "INPUT" ||
+    document.activeElement?.tagName == "TEXTAREA"
+  );
+}
 
 function focus(element: Element | null | undefined) {
   (element as HTMLElement | null)?.focus();
