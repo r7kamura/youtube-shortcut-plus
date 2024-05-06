@@ -22,6 +22,10 @@ export function focusDown() {
   focus(findDown());
 }
 
+export function isForcusable() {
+  return document.querySelectorAll(titleSelector).length > 1;
+}
+
 const rowSelector = "ytd-rich-grid-row";
 const columnSelector = "ytd-rich-item-renderer";
 const titleSelector = "a#video-title-link";
@@ -59,7 +63,7 @@ function findActiveRow() {
 }
 
 function findFirst() {
-  return document.querySelector(titleSelector) as HTMLElement | null;
+  return document.querySelector(titleSelector);
 }
 
 function isActive() {
