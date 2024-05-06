@@ -22,5 +22,10 @@ document.addEventListener("keydown", (event) => {
     default:
       return;
   }
+
+  // Prevent scrolling.
   event.preventDefault();
-});
+
+  // Prevent YouTube's keyboard shortcuts.
+  event.stopImmediatePropagation();
+}, true);
