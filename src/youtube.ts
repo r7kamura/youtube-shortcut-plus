@@ -1,17 +1,17 @@
 export function focusLeft() {
-  focus(findLeft());
+  focus(findLeft() as HTMLElement | null);
 }
 
 export function focusRight() {
-  focus(findRight());
+  focus(findRight() as HTMLElement | null);
 }
 
 export function focusUp() {
-  focus(findUp());
+  focus(findUp() as HTMLElement | null);
 }
 
 export function focusDown() {
-  focus(findDown());
+  focus(findDown() as HTMLElement | null);
 }
 
 export function isForcusable() {
@@ -31,8 +31,25 @@ function isEditing() {
   );
 }
 
-function focus(element: Element | null | undefined) {
-  (element as HTMLElement | null)?.focus();
+function focus(element: HTMLElement | null) {
+  if (!element) {
+    return;
+  }
+
+  element?.focus();
+
+  // Immitate the focus effect because the focus ring may not be visible (by bug?)
+  // and focusVisible option is not supported for now.
+  element.style.border = "1px solid #aaa";
+  element.style.margin = "-1px";
+  element.style.outline = "none";
+  const onBlur = () => {
+    element.style.border = "";
+    element.style.margin = "";
+    element.style.outline = "";
+    element?.removeEventListener("blur", onBlur);
+  };
+  element.addEventListener("blur", onBlur);
 }
 
 function findLeft() {
