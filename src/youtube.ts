@@ -15,8 +15,7 @@ export function focusDown() {
 }
 
 export function isForcusable() {
-  return !isEditing() &&
-    document.querySelectorAll(titleSelector).length > 1;
+  return isOnTopPage() && !isEditing();
 }
 
 const rowSelector = "ytd-rich-grid-row";
@@ -29,6 +28,10 @@ function isEditing() {
     document.activeElement?.tagName == "INPUT" ||
     document.activeElement?.tagName == "TEXTAREA"
   );
+}
+
+function isOnTopPage() {
+  return window.location.pathname == "/";
 }
 
 function focus(element: HTMLElement | null) {
